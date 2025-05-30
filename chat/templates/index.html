@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>ChatBot Cafeteria</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="chat-container">
+        <div id="chat-box" class="chat-box"></div>
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Digite sua mensagem..." autocomplete="off">
+            <button id="send-button" class="send-button" onclick="enviarMensagem()">enviar</button>
+            <button id="search-button" class="search-button" onclick="pesquisarArtigos()">🔍</button>            
+        </div>
+    </div>
+
+    <script>
+        function exibirMensagem(mensagem, remetente) {
+            if (remetente === "bot"){
+                mensagem = mensagem + " 🤖"              
+            } else {
+                mensagem = "👤 " + mensagem
+            }
+            const chatBox = document.getElementById("chat-box");
+            const messageElement = document.createElement("div");
+            messageElement.className = remetente;
+            messageElement.textContent = mensagem;
+            chatBox.appendChild(messageElement);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+
+	// FUNÇÃO DE PESQUISAR ARTIGOS AQUI
+	//
+
+	// FUNÇÃO DE ENVIAR MENSAGEM/PERGUNTA AQUI
+    function enviarMensagem(){
+        const input = document.getElementById("user-input");
+        const mensagem = input.value.trim();
+        if (!mensagem) return;
+
+        exibirMensagem(mensagem, "user");
+        input.value = "";
+        fetch("/responder",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({"pergunta": mensagem})
+        }).then(resposta => resposta.json()).then (conteudo => {exibirMensagem(conteudo.resposta, "bot")})
+    }   
+
+	//
+
+        document.getElementById("user-input").addEventListener("keydown", function(e) {
+            if (e.key === "Enter") enviarMensagem();
+        });
+    </script>
+</body>
+</html>

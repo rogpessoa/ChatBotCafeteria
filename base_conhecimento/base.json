@@ -1,0 +1,162 @@
+{
+  "base_conhecimento": [
+    {
+      "nome": "Cappuccino",
+      "descricao": "Café espresso com leite vaporizado e espuma de leite. Cremoso e suave.",
+      "tags": [
+        "café",
+        "cremoso",
+        "espresso",
+        "leite"
+      ]
+    },
+    {
+      "nome": "Latte",
+      "descricao": "Café espresso com bastante leite vaporizado e uma pequena camada de espuma.",
+      "tags": [
+        "café",
+        "leite",
+        "suave"
+      ]
+    },
+    {
+      "nome": "Mocha",
+      "descricao": "Café com chocolate, leite vaporizado e chantilly.",
+      "tags": [
+        "chocolate",
+        "doce",
+        "cremoso",
+        "café"
+      ]
+    },
+    {
+      "nome": "Espresso",
+      "descricao": "Café forte, sem leite, servido em dose pequena.",
+      "tags": [
+        "forte",
+        "puro",
+        "rápido"
+      ]
+    },
+    {
+      "nome": "Cold Brew",
+      "descricao": "Café extraído a frio por infusão longa, ideal para dias quentes.",
+      "tags": [
+        "gelado",
+        "refrescante",
+        "frio",
+        "café"
+      ]
+    },
+    {
+      "nome": "Croissant de Presunto e Queijo",
+      "descricao": "Massa folhada leve e crocante recheada com presunto e queijo mussarela. Um clássico francês adaptado ao paladar brasileiro.",
+      "tags": [
+        "salgado",
+        "folhado",
+        "presunto",
+        "queijo",
+        "clássico"
+      ]
+    },
+    {
+      "nome": "Empada de Frango com Requeijão",
+      "descricao": "Salgado de massa amanteigada recheado com frango desfiado cremoso e requeijão.",
+      "tags": [
+        "salgado",
+        "frango",
+        "requeijão",
+        "cremoso",
+        "café"
+      ]
+    },
+    {
+      "nome": "Pão de Queijo Recheado com Catupiry",
+      "descricao": "Versão recheada do tradicional pão de queijo mineiro. Por fora crocante, por dentro derretido e cremoso.",
+      "tags": [
+        "queijo",
+        "catupiry",
+        "mineiro",
+        "cremoso",
+        "salgado"
+      ]
+    },
+    {
+      "nome": "Mini Sanduíche Natural de Frango",
+      "descricao": "Pão integral com frango desfiado, cenoura ralada, alface e maionese temperada. Opção leve e refrescante.",
+      "tags": [
+        "frango",
+        "natural",
+        "leve",
+        "refrescante",
+        "integral"
+      ]
+    },
+    {
+      "nome": "Quiche de Alho-Poró",
+      "descricao": "Torta salgada com base amanteigada e recheio cremoso de ovos, queijo e alho-poró. Servida aquecida.",
+      "tags": [
+        "salgado",
+        "quiche",
+        "alho-poró",
+        "cremoso",
+        "quentinho"
+      ]
+    },
+    {
+      "nome": "Brownie de Chocolate com Nozes",
+      "descricao": "Doce denso e úmido, feito com chocolate meio amargo e pedaços crocantes de nozes. Servido em porções individuais.",
+      "tags": [
+        "doce",
+        "chocolate",
+        "nozes",
+        "úmido",
+        "brownie"
+      ]
+    },
+    {
+      "nome": "Fatia de Bolo de Cenoura com Cobertura de Chocolate",
+      "descricao": "Bolo macio de cenoura com calda generosa de chocolate. Um clássico brasileiro, perfeito para acompanhar o café.",
+      "tags": [
+        "bolo",
+        "cenoura",
+        "chocolate",
+        "clássico",
+        "doce"
+      ]
+    },
+    {
+      "nome": "Torta de Limão",
+      "descricao": "Massa crocante, recheio cremoso de limão e cobertura de merengue levemente tostado. Equilíbrio entre doce e ácido.",
+      "tags": [
+        "doce",
+        "limão",
+        "crocante",
+        "ácido",
+        "merengue"
+      ]
+    },
+    {
+      "nome": "Pudim de Leite Condensado",
+      "descricao": "Tradicional sobremesa brasileira feita com leite condensado, ovos e calda de caramelo. Textura macia e sabor suave.",
+      "tags": [
+        "pudim",
+        "leite condensado",
+        "caramelo",
+        "tradicional",
+        "doce"
+      ]
+    },
+    {
+      "nome": "Cheesecake com Calda de Frutas Vermelhas",
+      "descricao": "Base crocante de biscoito, recheio cremoso de cream cheese e cobertura de morango, amora e framboesa.",
+      "tags": [
+        "cheesecake",
+        "frutas vermelhas",
+        "morango",
+        "cremoso",
+        "doce"
+      ]
+    }
+  ]
+}

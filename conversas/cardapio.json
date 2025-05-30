@@ -1,0 +1,35 @@
+{
+    "conversas":[
+        {
+            "mensagem_usuario": ["quero cardapio", "Opções do menu", "o que tem no cardapio", "qual cardapio", "qual menu", "menu"],
+            "resposta_bot": "☕ Cafés, 🍵 Chás, 🥐 Salgados, 🍰 Doces"
+        },
+
+        {
+            "mensagem_usuario": ["Voce tem cardapio", "Voce tem menu", "quais as opçoes"],
+            "resposta_bot":"Claro! Temos cafés, chás, salgados, doces. O que você gostaria de ver primeiro?"
+        },
+
+        {
+            "mensagem_usuario": ["cafe", "cafés", "cafes", "café", "preço do café", "preço cafe","Quero ver os cafes", "quais opçoes de cafe", "tem espresso", "quais tipos de cafes", "tem Cappuccino"],
+            "resposta_bot": "Espresso — R$6.00, Cappuccino — R$8.00, Latte — R$8.50, Mocha — R$9.00, Cold Brew - R$12.00"
+        },
+        {
+            "mensagem_usuario": ["preço do cha", "cha", "chá","quero saber o preço do chá", "chás", "chas", "quais opçoes de chas"],
+            "resposta_bot": "Chá Verde - R$8.00, Chá de Hibisco - R$9.00, Chá de Camomila com Limão - R$10.00, Chá Preto com Especiarias - R$12.00, Chá Branco com Pessego - R$ 12.00"
+        },
+        {
+            "mensagem_usuario": ["salgados", "quais salgados", "opções de salgados", "tem", "preço do salgado"],
+            "resposta_bot": "🥐Croissant de Presunto e Queijo - R$13.00, 🥟Empada de Frango com Requeijão - R$9.00 🧀 3. Pão de Queijo Recheado com Catupiry - R$9.00, 🥪Mini Sanduíche Natural de Frango - R$10.00, 🥖Quiche de Alho-Poró - R$12.00"
+
+        },
+        {
+            "mensagem_usuario": ["doces", "opçes de doces", "quais doces", "voce tem algum doce", "quero doce", "preço do doce"],
+            "resposta_bot": "🍫Brownie de Chocolate com Nozes - R$10.00, 🍰Fatia de Bolo de Cenoura com Cobertura de Chocolate - R$10.00, 🥧Torta de Limão - R$12.00, 🍮Pudim de Leite Condensado - R$10.00, 🍓Cheesecake com Calda de Frutas Vermelhas - R$15.00"
+
+        }
+    ]
+}
+
+
+

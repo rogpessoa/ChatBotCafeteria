@@ -1,0 +1,14 @@
+{
+    "conversas":[
+        {
+            "mensagem_usuario": ["Que horas abre", "qual funcionamento", "quando abre", "funciona", "funcionamento", "abertura"],
+            "resposta_bot": "Funcionamos de segunda a sábado, das 8h às 19h. Aos domingos, das 9h às 15h."
+        },
+        {
+            "mensagem_usuario": ["quais formas de pagamento", "qual pagamento", "posso pagar"],
+            "resposta_bot": "Aceitamos Pix, cartões de crédito e débito, e dinheiro. Durante o pedido, você poderá escolher a forma de pagamento. 😉"
+        }
+    ]
+}
+
+
