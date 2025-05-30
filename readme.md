@@ -2,7 +2,7 @@
 # ChatBot - Cafeteria
 
 Esse projeto consiste na criação de um ChatBot para disciplina de Sistemas Otimizados para Web do curso de Pós-Graduação do IFBA/Vitória da Conquista.
-Nese projeto foi utilizado as bibliotecas nltk e chatterbot, ambos no Pyhton.
+Nesse projeto foi utilizado as bibliotecas nltk e chatterbot, ambos no Pyhton.
 Demais bibliotecas estão especificadas no requeriments.txt.
 
 
