@@ -1,0 +1,12 @@
+{
+    "conversas":[
+        {
+            "mensagem_usuario": ["quero pesquisar o que comer","quero pesquisar algo para comer", "quero pesquisar", "algo para comer"],
+            "resposta_bot": "Digite uma caracteristica do que deseja comer, por exemplo: chocolate"
+        },
+        {
+            "mensagem_usuario": ["quero pesquisar de novo", "outra pesquisa", "nova pesquisa"],
+            "resposta_bot": "Aceitamos Pix, cartões de crédito e débito, e dinheiro. Durante o pedido, você poderá escolher a forma de pagamento. 😉"
+        }
+    ]
+}

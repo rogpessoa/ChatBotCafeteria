@@ -8,7 +8,8 @@ BD_ROBO = "chat.sqlite3"
 CONVERSAS = [
     "./conversas/cardapio.json",
     "./conversas/horario_pagamento.json",
-    "./conversas/saudacoes.json"
+    "./conversas/saudacoes.json",
+    "./conversas/pesquisa.json"
     
 ]
 

@@ -2,26 +2,26 @@
     "conversas":[
         {
             "mensagem_usuario": ["qual seu nome", "seu nome", "nome"],
-            "resposta_bot": "Olá, obrigado por perguntar. Meu nome é Wesley Cafezão. Sou um bot que gosta de cafés 🍵"
+            "resposta_bot": "Olá, obrigado por perguntar. Meu nome é Wesley Cafezão. Sou um bot que gosta de cafés 🍵. Se quiser pesquisar algo só clicar no botão 🔍"
         },
         {
             "mensagem_usuario": [ "oi", "olá", "tudo bem?", "oi, tudo bem?", "ola" ],
-            "resposta_bot": "Olá! 😊 Bem-vindo à Cafeteria Wesley Cafezão! Posso te ajudar a consultar o cardápio, fazer um pedido ou tirar dúvidas. Como posso te ajudar hoje?" 
+            "resposta_bot": "Olá! 😊 Bem-vindo à Cafeteria Wesley Cafezão! Posso te ajudar a consultar o cardápio, fazer um pedido ou tirar dúvidas. Como posso te ajudar hoje?. Se quiser pesquisar algo só clicar no botão 🔍" 
         },
         {
             "mensagem_usuario": [ "bom dia" ],
-            "resposta_bot": "Bom dia, tudo bem? Bem-vindo à Cafeteria Wesley Cafezão! Posso te ajudar a consultar o cardápio, fazer um pedido ou tirar dúvidas. Como posso te ajudar hoje?" 
+            "resposta_bot": "Bom dia, tudo bem? Bem-vindo à Cafeteria Wesley Cafezão! Posso te ajudar a consultar o cardápio, fazer um pedido ou tirar dúvidas. Como posso te ajudar hoje?. Se quiser pesquisar algo só clicar no botão 🔍" 
         },
         {
             "mensagem_usuario": ["boa tarde"],
-            "resposta_bot": "Boa tarde, tudo bem? Bem-vindo à Cafeteria Wesley Cafezão! Posso te ajudar a consultar o cardápio, fazer um pedido ou tirar dúvidas. Como posso te ajudar hoje?"
+            "resposta_bot": "Boa tarde, tudo bem? Bem-vindo à Cafeteria Wesley Cafezão! Posso te ajudar a consultar o cardápio, fazer um pedido ou tirar dúvidas. Como posso te ajudar hoje?. Se quiser pesquisar algo só clicar no botão 🔍"
         },
         {
             "mensagem_usuario": ["boa noite"],
-            "resposta_bot": "Boa noite, tudo bem? Bem-vindo à Cafeteria Wesley Cafezão! Posso te ajudar a consultar o cardápio, fazer um pedido ou tirar dúvidas. Como posso te ajudar hoje?"
+            "resposta_bot": "Boa noite, tudo bem? Bem-vindo à Cafeteria Wesley Cafezão! Posso te ajudar a consultar o cardápio, fazer um pedido ou tirar dúvidas. Como posso te ajudar hoje?. Se quiser pesquisar algo só clicar no botão 🔍"
         },
         {
-            "mensagem_usuario": ["finalizar", "desistir", "acabar", "é so isso"],
+            "mensagem_usuario": ["sair", "finalizar", "desistir", "acabar", "é so isso"],
             "resposta_bot": "😊 Foi um prazer te atender. Qualquer coisa, é só chamar. Esperamos por você na Cafeteria Wesley Cafezão! ☕🍪"
         }
     ]

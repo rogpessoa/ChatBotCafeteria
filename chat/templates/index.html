@@ -32,7 +32,18 @@
 
 
 	// FUNÇÃO DE PESQUISAR ARTIGOS AQUI
-	//
+	function pesquisarArtigos(){
+        fetch("/responder", {
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({"pergunta": "quero pesquisar algo para comer"})
+
+        }).then(resposta => resposta.json()).then (conteudo => {exibirMensagem(conteudo.resposta, "bot")})
+
+        
+    }
 
 	// FUNÇÃO DE ENVIAR MENSAGEM/PERGUNTA AQUI
     function enviarMensagem(){

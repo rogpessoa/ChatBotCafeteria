@@ -1,3 +1,5 @@
 /.ideia
 chat.sqlite3
 /venv
+/chat/chat2.py
+/chat/chat3.py

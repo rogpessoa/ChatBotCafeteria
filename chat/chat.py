@@ -3,6 +3,8 @@ import requests
 from nltk.stem import RSLPStemmer
 import json
 import secrets
+from nltk import word_tokenize
+
 
 URL_ROBO = "http://localhost:5000"
 URL_ROBO_ALIVE = f"{URL_ROBO}/alive"
@@ -28,6 +30,10 @@ with open("C://Users//ROGERIOPESSOAANDRADE//Documents//PARTICULAR//Pos_IFba/MODU
 
 #Faz varredura no arquivo de base para encontrar as tags.
 for item in dados["base_conhecimento"]:
+    item["nome"] = item["nome"].lower()
+    item["descricao"] = item["descricao"].lower()
+    item["tags"] = [tag.lower() for tag in item["tags"]]
+
     for tag in item["tags"]:
         tag_processada = stemmer.stem(tag.lower())
         if tag_processada not in indice_tags_chat:
@@ -39,7 +45,7 @@ def obter_tags_chat():
     return list(indice_tags_chat.keys())
 
 def buscar_tag_para_chat(termo_usuario):
-    termo_processado = stemmer.stem(termo_usuario.lower())
+    termo_processado = termo_usuario
     return indice_tags_chat.get(termo_processado, [])
 
 # Função que processa o pedido via sessão
@@ -84,6 +90,19 @@ def acessar_robo(url, para_enviar=None):
         print(f"Erro acessando backend: {str(e)}")
         return False, None
 
+#Função que minera a pesquisa
+def minerar_busca_usuario(entrada_usuario):
+    sucesso = False
+    entrada_tokenizada = word_tokenize(entrada_usuario)
+    tags = obter_tags_chat()
+    for palavra in entrada_tokenizada:
+        if palavra in tags:
+            sucesso = True
+            return sucesso, palavra
+        
+    return acessar_robo(entrada_tokenizada)
+
+
 def robo_alive():
     sucesso, resposta = acessar_robo(URL_ROBO_ALIVE)
     return sucesso and resposta["alive"] == "sim"
@@ -102,14 +121,18 @@ def index():
 
 @chat.post("/responder")
 def get_resposta():
+    
     conteudo = request.json
     pergunta = conteudo.get("pergunta", "").strip().lower()
-    tags_processadas = obter_tags_chat()
     pergunta_processada = stemmer.stem(pergunta)
+    sucesso, resposta_minerar = minerar_busca_usuario(pergunta_processada)
+
+    #Faz as verificações com base no que o usuário digitar
     if pergunta in pedidos or session.get("estado_pedido"):
         resposta = fazer_pedido_chat(pergunta)
-    elif pergunta_processada in tags_processadas:
-        resposta = responder_usuario_por_tag_chat(pergunta)
+    
+    elif sucesso:
+        resposta = responder_usuario_por_tag_chat(resposta_minerar)
     else:
         resposta = perguntar_robo(pergunta)
 

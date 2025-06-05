@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, Response
+from flask import Flask, render_template, request, Response, session
 import requests
 from nltk.stem import RSLPStemmer
 import json
 import secrets
+from nltk import word_tokenize
 
 
 URL_ROBO = "http://localhost:5000"
@@ -18,12 +19,12 @@ stemmer = RSLPStemmer()
 indice_tags_chat = {}
 
 #Busca as mensagens de pedido
-with open("C://Users//ROGERIOPESSOAANDRADE//Documents//PARTICULAR//Pos_IFba/MODULO_2/SistemaEspecialistaWeb//cafeteria//pedido\msg_pedido.json", "r", encoding="utf-8") as f:
-    pedidos = json.load(f).get("mensagens", [])
-    f.close()
+with open("C://Users//ROGERIOPESSOAANDRADE//Documents//PARTICULAR//Pos_IFba/MODULO_2/SistemaEspecialistaWeb//cafeteria//pedido/msg_pedido.json", "r", encoding="utf-8") as msg_pedido:
+    pedidos = json.load(msg_pedido).get("mensagens", [])
+    msg_pedido.close()
 
-#Busca a base de conheciento
-with open("C://Users//ROGERIOPESSOAANDRADE//Documents//PARTICULAR//Pos_IFba\MODULO_2//SistemaEspecialistaWeb//cafeteria//base_conhecimento//base.json", "r", encoding="utf-8") as f:
+#Busca a base de conhecimento
+with open("C://Users//ROGERIOPESSOAANDRADE//Documents//PARTICULAR//Pos_IFba/MODULO_2/SistemaEspecialistaWeb//cafeteria//base_conhecimento/base.json", "r", encoding="utf-8") as f:
     dados = json.load(f)
     f.close()
 
@@ -33,42 +34,39 @@ for item in dados["base_conhecimento"]:
         tag_processada = stemmer.stem(tag.lower())
         if tag_processada not in indice_tags_chat:
             indice_tags_chat[tag_processada] = []
-            indice_tags_chat[tag_processada].append(item)
-
+        indice_tags_chat[tag_processada].append(item)
 
 #Função que busca as tags
 def obter_tags_chat():
     return list(indice_tags_chat.keys())
 
-
 def buscar_tag_para_chat(termo_usuario):
     termo_processado = stemmer.stem(termo_usuario.lower())
-    resultados = indice_tags_chat.get(termo_processado, [])
+    return indice_tags_chat.get(termo_processado, [])
 
-    return resultados
+# Função que processa o pedido via sessão
+def fazer_pedido_chat(pergunta):
+    if "estado_pedido" not in session:
+        session["estado_pedido"] = "esperando_item"
+        return "🛎️ Qual item você gostaria de pedir?"
 
-#Função que faz pedido do usuario
-def fazer_pedido_chat():
-    pedido_feito = ""
-    print("\n🛎️ Vamos fazer seu pedido! Você pode cancelar digitando 'cancelar'.\n")
-    item = input("🤖 Qual item você gostaria de pedir? ").strip()
-    if item.lower() == "cancelar":
-        print("🤖 Pedido cancelado.")
-        return
+    estado = session["estado_pedido"]
 
-    entrega = input("🤖 Você deseja retirar no local ou delivery? ").strip().lower()
-    if entrega == "cancelar":
-        print("🤖 Pedido cancelado.")
-        return
-    while entrega not in ["retirar", "delivery", "local"]:
-        entrega = input("🤖 Por favor, responda com 'retirar' ou 'delivery': ").strip().lower()
-        if entrega == "cancelar":
-            print("🤖 Pedido cancelado.")
-            return
-    pedido_feito = f"\n✅ Pedido registrado com sucesso!\n📝 Item: {item}\n📦 Entrega: {entrega}\n"
-    return pedido_feito
+    if estado == "esperando_item":
+        session["pedido_item"] = pergunta
+        session["estado_pedido"] = "esperando_entrega"
+        return "📦 Você deseja retirar no local ou delivery?"
 
+    elif estado == "esperando_entrega":
+        if pergunta.lower() not in ["retirar", "delivery"]:
+            return "Por favor, responda com 'retirar' ou 'delivery'."
 
+        item = session.pop("pedido_item", "")
+        entrega = pergunta
+        session.pop("estado_pedido", None)
+        return f"✅ Pedido registrado com sucesso!\n📝 Item: {item}\n📦 Entrega: {entrega}"
+
+    return "Erro no processo do pedido. Por favor, tente novamente."
 
 def responder_usuario_por_tag_chat(entrada_usuario):
     resultados = buscar_tag_para_chat(entrada_usuario)
@@ -78,73 +76,61 @@ def responder_usuario_por_tag_chat(entrada_usuario):
             resposta += f"- {item['nome']}: {item['descricao']}\n"
     else:
         resposta = f"\n❌ Nenhum resultado encontrado para '{entrada_usuario}'."
-
     return resposta
 
-
-def acessar_robo(url, para_enviar = None): #Se tiver algo para enviar o metodo é post se nao, get.
-    sucesso, resposta = False, None
-
+def acessar_robo(url, para_enviar=None):
     try:
-        if para_enviar: #Se para enviar contiver algum json ele entra aqui e devolve um post
-            resposta = requests.post(url, json=para_enviar)
-        else: #Se nao tiver nada é um get
-            resposta = requests.get(url)
-        
-        resposta = resposta.json()
-        sucesso = True
-        
+        resposta = requests.post(url, json=para_enviar) if para_enviar else requests.get(url)
+        return True, resposta.json()
     except Exception as e:
         print(f"Erro acessando backend: {str(e)}")
+        return False, None
+
+#Função que minera a pesquisa
+def minerar_busca_usuario(entrada_usuario):
+    sucesso = False
+    entrada_tokenizada = word_tokenize(entrada_usuario)
+    tags = obter_tags_chat()
+    for palavra in entrada_tokenizada:
+        if palavra in tags:
+            sucesso = True
+            return sucesso, palavra
         
-    return sucesso, resposta
+    return acessar_robo(entrada_tokenizada)
 
 
-#Função para verificar se a URL do robo está online
 def robo_alive():
     sucesso, resposta = acessar_robo(URL_ROBO_ALIVE)
     return sucesso and resposta["alive"] == "sim"
 
-
 def perguntar_robo(pergunta):
     sucesso, resposta = acessar_robo(URL_ROBO_RESPONDER, {"pergunta": pergunta})
-    mensagem = "Infelizmente ainda não sei responder essa pergunta."
     if sucesso and resposta["confianca"] >= CONFIANCA_MINIMA:
-        mensagem = resposta["resposta"]
-    return mensagem
-    #Se a confiança for maior que a minima ele muda a mensagem padrão para a mensagem enviada pelo robo
-
+        return resposta["resposta"]
+    return "Infelizmente ainda não sei responder essa pergunta."
 
 @chat.get("/")
 def index():
     return render_template("index.html")
 
+#Rota que interage com usuario
 
-#rota que interage com o chat
 @chat.post("/responder")
 def get_resposta():
-    resposta = ""
+    
     conteudo = request.json
-    pergunta = conteudo["pergunta"]
-    tags_processadas = obter_tags_chat()
+    pergunta = conteudo.get("pergunta", "").strip().lower()
     pergunta_processada = stemmer.stem(pergunta)
-    #Se o ususario quiser fazer pedido
-    if pergunta in pedidos:
-        fazer_pedido_chat()
-        return Response(json.dumps({"resposta": resposta}), status=200, mimetype="application/json")
-    #Se usuario digitou alguma tag
-    if pergunta_processada in tags_processadas:
-        resposta = responder_usuario_por_tag_chat(pergunta)
-        return Response(json.dumps({"resposta": resposta}), status=200, mimetype="application/json")
-    #Responder as perguntas basicas
+    sucesso, resposta_minerar = minerar_busca_usuario(pergunta_processada)
+    if pergunta in pedidos or session.get("estado_pedido"):
+        resposta = fazer_pedido_chat(pergunta)
+    
+    elif sucesso:
+        resposta = responder_usuario_por_tag_chat(resposta_minerar)
     else:
         resposta = perguntar_robo(pergunta)
-        return Response(json.dumps({"resposta": resposta}), status=200, mimetype="application/json")
 
+    return Response(json.dumps({"resposta": resposta}), status=200, mimetype="application/json")
 
 if __name__ == "__main__":
-    chat.run(
-        host = "0.0.0.0",
-        port = 5001,
-        debug=True
-    )
+    chat.run(host="0.0.0.0", port=5001, debug=True)

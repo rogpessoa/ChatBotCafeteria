@@ -78,7 +78,7 @@ def executar(robo):
         if mensagem in pedidos:
             modo_fazer_pedido()
             continue
-        #Caso o usuario deseje encerrar a conversa
+        #Caso o usuario queira encerrar a conversa
         if mensagem in ["finalizar", "desistir", "acabar", "é so isso", "sair", "cancelar"]:
             print("Você escolheu encerrar nossa conversa 😔. Espero vê-lo em breve!")
             break
